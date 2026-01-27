@@ -1,7 +1,7 @@
 # ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-## Template Instructions
 
+#
 Welcome,
 
 This is the Code Institute student template for the Data Analytics capstone project. We have preinstalled all of the tools you need to get started. It's perfectly okay to use this template as the basis for your project submissions. Click the `Use this template` button above to get started.
@@ -70,3 +70,6 @@ Note that the kernel says `Python 3.12.8` as it inherits from the venv, so it wi
 4. Select the branch you want to deploy, then click **Deploy Branch**.
 5. The deployment process should happen smoothly if all deployment files are fully functional. Click the button **Open App** at the top of the page to access your App.
 6. If the slug size is too large, then add large files not required for the app to the `.slugignore` file.
+
+
+# Retail Superstore Sales Analysis
