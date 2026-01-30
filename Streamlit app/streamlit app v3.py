@@ -16,8 +16,20 @@ st.set_page_config(
 )
 
 st.title("📊 Superstore Sales Dashboard")
-st.caption("Interactive analytics for sales, profitability, and discount risk.")
+st.caption("Interactive analytics dashboard for exploring sales performance, profitability drivers, "
+    "and discount risk across regions, categories, and customer segments. "
+    "All metrics and visualisations update dynamically based on sidebar filters, "
+    "supporting data-driven decision-making and stakeholder insight.")
 
+
+with st.expander("How to use this dashboard"):
+    st.markdown("""
+    **How to use:**
+    - Adjust filters in the sidebar to narrow the dataset  
+    - Metrics update automatically based on your selections  
+    - Charts reflect the current filtered view  
+    - Use different date ranges and segments to compare performance  
+    """)
 # -----------------------------
 # Load data
 # -----------------------------
@@ -71,17 +83,12 @@ if missing:
     st.stop()
 
 # -----------------------------
-# Sidebar filters
+# Sidebar filters of min and max date
 # -----------------------------
 st.sidebar.header("Filters")
 
 min_date = df["order_date"].min()
 max_date = df["order_date"].max()
-
-# Guard against any NaT after coercion
-if pd.isna(min_date) or pd.isna(max_date):
-    st.error("order_date contains invalid or missing dates after parsing. Check your processed CSV.")
-    st.stop()
 
 date_range = st.sidebar.date_input(
     "Order date range",
@@ -139,7 +146,7 @@ c5.metric(
 st.divider()
 
 # -----------------------------
-# Helper: AI-like summary (safe fallback)
+# Helper: AI-style Summary
 # -----------------------------
 def generate_rule_based_summary(d: pd.DataFrame) -> str:
     # Top category by profit
@@ -166,7 +173,7 @@ def generate_rule_based_summary(d: pd.DataFrame) -> str:
 
 with st.expander("AI-Generated Summary (for stakeholders)", expanded=True):
     st.write(generate_rule_based_summary(fdf))
-    st.caption("This is a safe, rule-based ‘AI-style’ narrative generated from the filtered dataset.")
+    st.caption("This is a rule-based ‘AI-style’ narrative generated from the filtered dataset.")
 
 st.divider()
 
@@ -340,6 +347,6 @@ else:
 # Footer / Notes
 # -----------------------------
 st.caption(
-    "Notes: This dashboard is built for stakeholder exploration. Use filters to compare groups and validate findings. "
-    "All metrics update dynamically based on selection."
+    "Notes: This dashboard is built for exploration. Use filters to compare groups and timespans. "
+    "All metrics update based on selection."
 )
