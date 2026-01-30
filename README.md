@@ -41,9 +41,9 @@ Whether profit can be reasonably predicted from order features using a regressio
 # Project Files
 
 ```
-Dataset Cleaning and EDA v4.ipynb
-Modelling and Regression v2.ipynb
-streamlit app v4.py
+Dataset Cleaning and EDA.ipynb
+Modelling and Regression.ipynb
+streamlit_app.py
 ```
 
 * Cleaning script — prepares and fixes the dataset
