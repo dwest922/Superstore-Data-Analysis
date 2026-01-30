@@ -30,6 +30,14 @@ with st.expander("How to use this dashboard"):
     - Charts reflect the current filtered view  
     - Use different date ranges and segments to compare performance  
     """)
+
+st.markdown(
+    "### Story flow\n"
+    "Start with the **Overview** KPIs, then compare **Category** and **Regional** performance. "
+    "Next, explore **Discount vs Profit Risk** to spot margin pressure, and use **Time Trends** "
+    "and **Distribution View** to validate patterns over time and identify outliers."
+)
+
 # -----------------------------
 # Load data
 # -----------------------------
@@ -180,6 +188,11 @@ st.divider()
 # -----------------------------
 # Category Performance (Bar chart)
 # -----------------------------
+st.caption(
+    "Compare categories by **total profit** and **total sales**. "
+    "Look for categories with **high sales but lower profit**, which can indicate margin pressure "
+    "or discount-heavy selling."
+)
 st.subheader("Category Performance")
 
 cat_summary = (
@@ -217,7 +230,11 @@ st.divider()
 # Regional Performance (Bar)
 # -----------------------------
 st.subheader("Regional Performance")
-
+st.caption(
+    "This view highlights which regions contribute most to overall profitability. "
+    "Use it to identify **strong-performing regions** and areas that may require pricing, mix, "
+    "or operational attention."
+)
 reg_summary = (
     fdf.groupby("region", as_index=False)
     .agg(total_sales=("sales", "sum"), total_profit=("profit", "sum"))
@@ -285,7 +302,10 @@ st.divider()
 # Time Trends (Line chart)
 # -----------------------------
 st.subheader("Time Trends")
-
+st.caption(
+    "Track performance over time to spot **seasonality**, growth/decline periods, and moments where "
+    "**profit diverges from sales** (potential discounting or cost effects)."
+)
 monthly = (
     fdf.dropna(subset=["order_date"])
     .assign(order_month_start=lambda d: d["order_date"].dt.to_period("M").dt.to_timestamp())
@@ -321,10 +341,13 @@ with colR:
 st.divider()
 
 # -----------------------------
-# Histogram (required plot type)
+# Histogram
 # -----------------------------
 st.subheader("Distribution View")
-
+st.caption(
+    "Histograms help identify **skewness** and **outliers**. "
+    "Skewed distributions mean the **median** may represent a more typical order than the mean."
+)
 metric_choice = st.selectbox(
     "Choose a metric to view distribution",
     options=["sales", "profit", "discount", "quantity", "ship_days"],
@@ -349,4 +372,8 @@ else:
 st.caption(
     "Notes: This dashboard is built for exploration. Use filters to compare groups and timespans. "
     "All metrics update based on selection."
+)
+st.caption(
+    "Data source: Public anonymised retail dataset — "
+    "[Superstore Dataset (Kaggle)](https://www.kaggle.com/datasets/vivek468/superstore-dataset-final)"
 )
