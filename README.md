@@ -113,7 +113,7 @@ The dashboard is built with Streamlit.
 Run it with:
 
 ```
-streamlit run "streamlit app v4.py"
+streamlit run "streamlit_app.py"
 ```
 
 ## Controls
